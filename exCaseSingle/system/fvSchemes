@@ -27,6 +27,9 @@ ddtSchemes
 gradSchemes
 {
     default         leastSquares;
+    //default         Gauss linear;
+    //grad(p)         Gauss linear;
+    //grad(U)         Gauss linear;
     grad(U)         cellLimited leastSquares 1;
     grad(p)         cellLimited leastSquares 1;
 }
@@ -34,12 +37,10 @@ gradSchemes
 divSchemes
 {	//First order.
      default         none;
-    div(phi,U)      Gauss linearUpwind grad(U);
-    div(phi,k)      Gauss upwind;
-    div(phi,omega)  Gauss upwind;
+    div(phi,U)      Gauss linearUpwind grad(U); // Was Gauss linearUpwind grad(U)
+    div(phi,k)      Gauss upwind; 
+    div(phi,omega)  Gauss upwind; 
     div((nuEff*dev2(T(grad(U))))) Gauss linear;
-    div(phi,nuTilda) Gauss linearUpwind grad(nuTilda);
-    div((nuEff*dev(T(grad(U))))) Gauss linear;
 }
 
 laplacianSchemes

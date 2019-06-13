@@ -19,32 +19,33 @@ solvers
     pcorr
     {
         solver           	GAMG;
-        tolerance        	0.01; // Was 0.02
-        relTol           	0; // Was 0
-        smoother         	GaussSeidel; // Was GaussSeidel
-        nPreSweeps       	0; // Was 0
-        nPostSweeps      	2; // 2
-        cacheAgglomeration 	true; // Was on
+        tolerance        	0.01; 
+        relTol           	0; 
+        smoother         	GaussSeidel;
+        nPreSweeps       	0; 
+        nPostSweeps      	2;
+        cacheAgglomeration 	true; 
         agglomerator     	faceAreaPair;
-        nCellsInCoarsestLevel 	50; // Was 10
+        nCellsInCoarsestLevel 	50;
         mergeLevels      	1;
+	    maxIterations		100;
     }
 
     p
     {
         $pcorr;
-        tolerance       1e-4; // 1e-6
-        relTol          0.01; // Was 0.01
+        tolerance       1e-4; 
+        relTol          0.01; 
     }
 
     pFinal
     {
         $p;
-        tolerance       1e-4; // 1e-6
-        relTol          0; // Was 0
+        tolerance       1e-5; // 1e-6
+        relTol          0; 
     }
 
-    "(U|k|omega|nuTilda)"
+    "(U|k|omega)"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
@@ -52,11 +53,11 @@ solvers
         relTol          0.1;
     }
 
-    "(U|k|omega|nuTilda)Final"
+    "(U|k|omega)Final"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
-        tolerance       1e-4;
+        tolerance       1e-5;
         relTol          0;
     }
 
@@ -65,9 +66,9 @@ solvers
 PIMPLE
 {
     correctPhi          no;
-    nOuterCorrectors    20; // Was 2, set higher for more PIMPLE loops
-    nCorrectors         3; // Was 1
-    nNonOrthogonalCorrectors 1; // Was 0
+    nOuterCorrectors    30; 
+    nCorrectors         2; 
+    nNonOrthogonalCorrectors 1; 
     pRefCell            0;
     pRefValue           0;
 
@@ -75,13 +76,13 @@ PIMPLE
     {
         U
         {
-            tolerance 1e-2;
+            tolerance 1e-3;
             relTol 0;
         }
 
         p
         {
-            tolerance 1e-2;
+            tolerance 1e-3;
             relTol 0;
         }
     }
@@ -96,8 +97,8 @@ relaxationFactors
     }
     equations
     {
-        "(U|k|omega|nuTilda)"       0.8;
-        "(U|k|omega|nuTilda)Final"  1;
+        "(U|k|omega)"       0.8;
+        "(U|k|omega)Final"  1;
     }
 }
 
