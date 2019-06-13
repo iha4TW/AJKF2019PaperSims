@@ -1,0 +1,22 @@
+#!/bin/bash
+mkdir temp
+mkdir temp/mesh1
+mkdir temp/mesh2
+cp -R exCaseSingle/* temp/mesh1
+cp -R exCaseSingle/* temp/mesh2
+cp single/coarseStationary.unv temp/mesh1
+cp single/coarseTurbine.unv temp/mesh2
+cd temp/mesh1
+ideasUnvToFoam coarseStationary.unv
+transformPoints -scale '(0.001 0.001 0.001)'
+cd ../mesh2
+ideasUnvToFoam coarseTurbine.unv
+transformPoints -scale '(0.001 0.001 0.001)'
+mergeMeshes ../mesh1 . -overwrite
+cd ../mesh1
+createPatch -dict system/createPatchDict1 -overwrite
+createPatch -dict system/createPatchDict2 -overwrite
+cd ../../
+mkdir SingleCoarse
+mv temp/mesh1/* SingleCoarse
+rm -R temp

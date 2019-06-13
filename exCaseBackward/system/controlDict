@@ -1,0 +1,221 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.2                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+application     pimpleDyMFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1e5;
+
+deltaT   	2.36e-4; 
+
+writeControl    adjustableRunTime;
+
+writeInterval   2.36e-3; 
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  10;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   10;
+
+runTimeModifiable true;
+
+adjustTimeStep  no;
+
+maxCo           10;
+
+functions 
+{
+
+//	yPlus
+//	{
+//	    type        yPlus;
+//	    libs        ("libfieldFunctionObjects.so");
+//	}
+
+    forcesBlade1
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade1);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+
+    forcesBlade2
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade2);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+
+    forcesBlade3
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade3);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+    forcesBlade4
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade4);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 -0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+
+    forcesBlade5
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade5);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 -0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+
+    forcesBlade6
+    {
+        type forces;
+        functionObjectLibs ("libforces.so");
+        outputControl timeStep;
+        outputInterval 1;
+        patches (blade6);
+	//writeFields yes;
+
+        rhoName rhoInf;
+        log false;
+        CofR (0 -0.0425 0);
+	rho	rhoInf;
+	rhoInf	1e3;
+    }
+	  yPlusb1
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade1);
+  }
+  yPlusb2
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade2);
+  }
+  yPlusb3
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade3);
+  }
+    yPlusb4
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade4);
+  }
+  yPlusb5
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade5);
+  }
+  yPlusb6
+  {
+    type            yPlus;
+    libs            ("libfieldFunctionObjects.so");
+
+    executeControl  writeTime;
+    writeControl    writeTime;
+
+    patches (blade6);
+  }
+
+};
+
+
+
+// ************************************************************************* //

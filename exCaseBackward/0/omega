@@ -1,0 +1,97 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      omega;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 30;
+
+boundaryField
+{
+    blade1
+    {
+
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    blade2
+    {
+
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    blade3
+    {
+
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    blade4
+    {
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    blade5
+    {
+
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    blade6
+    {
+
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+    wall
+    {
+        type            omegaWallFunction;
+	value		$internalField;
+    }
+    inlet
+    {
+        type            fixedValue;
+	value		$internalField;
+    }
+    iIR
+    {
+        type            cyclicAMI;
+    }
+    iOR
+    {
+        type            cyclicAMI;
+    }
+    iIL
+    {
+        type            cyclicAMI;
+    }
+    iOL
+    {
+        type            cyclicAMI;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+}
+
+
+// ************************************************************************* //

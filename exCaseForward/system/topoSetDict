@@ -1,0 +1,115 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+
+  {
+    name aroundBlade4;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+             //origin   (0.0426 -0.012 0);
+             //i        (-0.0086 0.0086 0);
+             //j        (-0.027 -0.027 0);
+             //k        (0 0 2);
+			 //origin 	(-0.0109 0.0854 0); //origin 	(-0.0109 0.0429 0)
+			 origin     (-0.00726 0.0812 0);//(-0.0087371 0.081665 0);//(-0.0079496 0.0846 0);
+			 i 			(-0.001575 -0.00587 0); //divide by 2(-0.00315 -0.01174 0);
+			 j			(0.029504 -0.007904 0); // Multiply by 1.2/1.5 (0.03688 -0.00988 0);
+			 k			(0 0 2);
+    }
+
+  }
+    {
+    name aroundBlade5;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+ 
+			 origin     (-0.029953 0.016821 0);
+			 i 			(0.00587107 0.00157101 0); 
+			 j			(-0.00790694 0.02950321 0);
+			 k			(0 0 2);
+    }
+
+  }
+  {
+    name aroundBlade6;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+ 
+			 origin     (0.0372149 0.029399 0);
+			 i 			(-0.004296 0.00429890 0); 
+			 j			(-0.021597 -0.021599 0);
+			 k			(0 0 2);
+    }
+
+  }
+  {
+    name aroundBlade1;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+			 origin     (-0.00726 -0.0812 0);
+			 j 			(-0.001575 0.00587 0);
+			 i			(0.029504 0.007904 0);
+			 k			(0 0 2);
+    }
+   }
+   {
+    name aroundBlade2;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+ 
+			 origin     (-0.029953 -0.016821 0);
+			 j 			(0.00587107 -0.00157101 0); 
+			 i			(-0.00790694 -0.02950321 0);
+			 k			(0 0 2);
+    }
+   }
+   {
+    name aroundBlade3;
+    type cellSet;
+    action new;
+    source rotatedBoxToCell;
+    sourceInfo
+    {
+ 
+			 origin     (0.0372149 -0.029399 0);
+			 j 			(-0.004296 -0.00429890 0); 
+			 i			(-0.021597 0.021599 0);
+			 k			(0 0 2);
+    }
+
+   }
+
+);
+
+// ************************************************************************* //

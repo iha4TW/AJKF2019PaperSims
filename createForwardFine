@@ -1,0 +1,30 @@
+#!/bin/bash
+mkdir temp
+mkdir temp/mesh1
+mkdir temp/mesh2
+mkdir temp/mesh3
+cp -R exCase/* temp/mesh1
+cp -R exCase/* temp/mesh2
+cp -R exCase/* temp/mesh3
+cp pair/fineChannel.unv temp/mesh1
+cp pair/fineTurbineBot.unv temp/mesh2
+cp pair/fineTurbineTop.unv temp/mesh3
+cd temp/mesh1
+ideasUnvToFoam fineChannel.unv
+transformPoints -scale '(0.001 0.001 0.001)'
+cd ../mesh2
+ideasUnvToFoam fineTurbineBot.unv
+transformPoints -scale '(0.001 0.001 0.001)'
+cd ../mesh3
+ideasUnvToFoam fineTurbineTop.unv
+transformPoints -scale '(0.001 0.001 0.001)'
+mergeMeshes ../mesh1 . -overwrite
+cd ../mesh2
+mergeMeshes ../mesh1 . -overwrite
+cd ../mesh1
+createPatch -dict system/createPatchDict1 -overwrite
+createPatch -dict system/createPatchDict2 -overwrite
+cd ../../
+mkdir ForwardFine
+mv temp/mesh1/* ForwardFine
+rm -R temp

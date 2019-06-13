@@ -1,0 +1,91 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      createPatchDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+pointSync false;
+patches
+(
+    {
+        name                iOR;
+        patchInfo
+        {
+            type            cyclicAMI;
+            neighbourPatch  iIR;
+            transform       noOrdering;
+        }
+        constructFrom patches;
+        patches (interfaceOutRight);
+    }
+	{
+        name                iIR;
+        patchInfo
+        {
+            type            cyclicAMI;
+            neighbourPatch  iOR;
+            transform       noOrdering;
+        }
+        constructFrom patches;
+        patches (interfaceInRight);
+    }
+	{
+	        name                frontAndBack;
+        patchInfo
+        {
+            type            empty;
+        }
+        constructFrom patches;
+        patches (front*);
+    }
+	{
+	        name                b1;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (blade1);
+    }
+		{
+	        name                b2;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (blade2);
+    }
+		{
+	        name                b3;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (blade3);
+    }
+	{
+	        name                w;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (wall);
+    }
+
+
+    
+);
+
+// ************************************************************************* //
